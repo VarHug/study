@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { BrowserRouter, Link, Switch, Route } from 'react-router-dom';
 
 const Shop = () => {
   return <div>商品列表页</div>;
@@ -21,48 +22,31 @@ const routes = [
   }
 ];
 
-const getHashPath = (path) => {
-  return `#${path}`;
-};
-
-const Page = ({ route }) => {
-  const routesMap = routes.reduce((res, route) => {
-    const { path } = route;
-    res[path] = route;
-    return res;
-  }, {});
-  if (routesMap[route]) {
-    const Route = routesMap[route].component;
-    return <Route />;
-  }
-  return null;
-};
-
 const App = () => {
-  const [route, setRoute] = useState('');
-
-  useEffect(() => {
-    window.addEventListener('hashchange', () => {
-      const r = window.location.hash.substr(1);
-      setRoute(r);
-    });
-  }, []);
-
   return (
     <div>
-      <ul>
-        {
-          routes.map((route) => {
-            const { path, text } = route;
-            return (
-              <li key={path}>
-                <a href={getHashPath(path)}>{text}</a>
-              </li>
-            );
-          })
-        }
-      </ul>
-      <Page route={route} />
+      <BrowserRouter>
+        <ul>
+          {
+            routes.map((route) => {
+              const { path, text } = route;
+              return (
+                <li key={path}>
+                  <Link to={path}>{text}</Link>
+                </li>
+              );
+            })
+          }
+        </ul>
+        <Switch>
+          {
+            routes.map((route) => {
+              const { path, component } = route;
+              return <Route key={path} path={path} component={component} exact />;
+            })
+          }
+        </Switch>
+      </BrowserRouter>
     </div>
   );
 };
