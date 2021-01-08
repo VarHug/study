@@ -31,6 +31,16 @@ module.exports = {
       flatTernaryExpressions: false,
       ignoredNodes: ['JSXElement', 'JSXElement *']
     }],
+    'comma-spacing': ['error', { before: false, after: true }],
+    'keyword-spacing': ['error', {
+      before: true,
+      after: true,
+      overrides: {
+        return: { after: true },
+        throw: { after: true },
+        case: { after: true }
+      }
+    }],
     // es6
     'no-var': 'error',
     'prefer-const': ['error', {
