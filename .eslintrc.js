@@ -41,12 +41,15 @@ module.exports = {
         case: { after: true }
       }
     }],
+    'space-infix-ops': 'error',
+    'key-spacing': ['error', { beforeColon: false, afterColon: true }],
     // es6
     'no-var': 'error',
     'prefer-const': ['error', {
       destructuring: 'any',
       ignoreReadBeforeAssign: true,
     }],
+    'arrow-spacing': ['error', { before: true, after: true }],
     // best-practices
     'no-multi-spaces': ['error', {
       ignoreEOLComments: false,
@@ -54,5 +57,7 @@ module.exports = {
     // react
     'react/self-closing-comp': 'error',
     'react/jsx-indent': ['error', 2],
+    // typescript
+    '@typescript-eslint/type-annotation-spacing': 'error',
   },
 };
