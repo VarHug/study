@@ -1,53 +1,30 @@
 import React from 'react';
-import { BrowserRouter, Link, Switch, Route } from 'react-router-dom';
+import Effects from './Effect';
+import { useFoodsContext } from './context/FoodsContext';
 
-const Shop = () => {
-  return <div>商品列表页</div>;
+const A = () => {
+  const { food = {} } = useFoodsContext();
+
+  const { name } = food;
+
+  return <div>{name}</div>;
 };
 
-const ShopItem = () => {
-  return <div>商品详情页</div>;
-};
+const B = () => {
+  const { food = {} } = useFoodsContext();
 
-const routes = [
-  {
-    path: '/shop',
-    component: Shop,
-    text: 'Shop',
-  },
-  {
-    path: '/shop-item',
-    component: ShopItem,
-    text: 'ShopItem',
-  }
-];
+  const { name } = food;
+
+  return <div>{name}</div>;
+};
 
 const App = () => {
   return (
-    <div>
-      <BrowserRouter>
-        <ul>
-          {
-            routes.map((route) => {
-              const { path, text } = route;
-              return (
-                <li key={path}>
-                  <Link to={path}>{text}</Link>
-                </li>
-              );
-            })
-          }
-        </ul>
-        <Switch>
-          {
-            routes.map((route) => {
-              const { path, component } = route;
-              return <Route key={path} path={path} component={component} exact />;
-            })
-          }
-        </Switch>
-      </BrowserRouter>
-    </div>
+    <>
+      <Effects />
+      <A />
+      <B />
+    </>
   );
 };
 
